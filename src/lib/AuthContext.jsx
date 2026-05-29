@@ -19,19 +19,12 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const checkAppState = async () => {
-    try {
-      setIsLoadingPublicSettings(true);
-      setAuthError(null);
-
-      if (!appParams.appId) {
-        setAppPublicSettings(null);
-        setUser({ name: 'Local User', email: 'local@pulse.app' });
-        setIsAuthenticated(true);
-        setIsLoadingPublicSettings(false);
-        setIsLoadingAuth(false);
-        setAuthChecked(true);
-        return;
-      }
+  setUser({ name: 'Demo User', email: 'demo@pulse.app' });
+  setIsAuthenticated(true);
+  setIsLoadingPublicSettings(false);
+  setIsLoadingAuth(false);
+  setAuthChecked(true);
+};
       
       // First, check app public settings (with token if available)
       // This will tell us if auth is required, user not registered, etc.
