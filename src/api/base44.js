@@ -8,7 +8,7 @@
     appId,
     token,
     functionsVersion,
-    serverUrl: 'https://appbackend.base44.com',
+    serverUrl: 'https://app.base44.com',
     requiresAuth: false,
     appBaseUrl
     });
