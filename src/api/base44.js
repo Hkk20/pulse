@@ -5,10 +5,10 @@
 
     //Create a client with authentication required
     export const base44 = createClient({
-    appId,
-    token,
-    functionsVersion,
-    serverUrl: 'https://app.base44.com',
-    requiresAuth: false,
-    appBaseUrl
-    });
+  appId,
+  // token removed — SDK reads from localStorage dynamically
+  functionsVersion,
+  serverUrl: 'https://app.base44.com',
+  requiresAuth: false,
+  appBaseUrl
+});
