@@ -1,3 +1,4 @@
+import React from 'react';
 import { Star } from 'lucide-react';
 
 const staff = [
@@ -15,19 +16,24 @@ export default function TopStaff() {
         <button className="text-xs font-medium text-primary hover:underline">View all</button>
       </div>
       <div className="space-y-3">
-        {staff.map((member) => (
-          <div key={member.name} className="flex items-center gap-3 p-3 rounded-xl hover:bg-muted/50 transition-colors cursor-pointer group">
-            <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-lg group-hover:scale-110 transition-transform">{member.avatar}</div>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold text-foreground">{member.name}</p>
-              <p className="text-xs text-muted-foreground">{member.role}</p>
+        {staff.map((s, i) => (
+          <div
+            key={s.name}
+            className="flex items-center gap-3 p-3 rounded-xl hover:bg-muted/50 transition-colors cursor-pointer group"
+          >
+            <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
+              {s.avatar}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-foreground">{s.name}</p>
+              <p className="text-xs text-muted-foreground">{s.role}</p>
             </div>
             <div className="text-right">
-              <div className="flex items-center justify-end gap-1">
+              <div className="flex items-center gap-1 justify-end">
                 <Star className="w-3 h-3 text-warning fill-warning" />
-                <span className="text-xs font-bold text-foreground">{member.rating}</span>
+                <span className="text-xs font-bold text-foreground">{s.rating}</span>
               </div>
-              <p className="text-[11px] text-muted-foreground">{member.hours}h/wk</p>
+              <p className="text-[11px] text-muted-foreground">{s.hours}h/wk</p>
             </div>
           </div>
         ))}

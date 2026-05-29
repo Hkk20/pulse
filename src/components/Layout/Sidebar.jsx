@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 
 const navItems = [
-  { label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
+  { label: 'Dashboard', icon: LayoutDashboard, path: '/' },
   { label: 'Staff', icon: Users, path: '/staff' },
   { label: 'Payroll', icon: Wallet, path: '/payroll' },
   { label: 'Operations', icon: ClipboardList, path: '/operations' },

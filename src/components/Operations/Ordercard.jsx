@@ -1,11 +1,12 @@
+import React from 'react';
 import { Badge } from '@/components/ui/badge';
-import { ChevronRight, Clock, MapPin } from 'lucide-react';
+import { Clock, MapPin, ChevronRight } from 'lucide-react';
 
 const statusStyles = {
-  new: 'bg-chart-5/10 text-chart-5 border-chart-5/20',
-  preparing: 'bg-accent/10 text-accent border-accent/20',
-  ready: 'bg-success/10 text-success border-success/20',
-  delivered: 'bg-muted text-muted-foreground border-border',
+  'new': 'bg-chart-5/10 text-chart-5 border-chart-5/20',
+  'preparing': 'bg-accent/10 text-accent border-accent/20',
+  'ready': 'bg-success/10 text-success border-success/20',
+  'delivered': 'bg-muted text-muted-foreground border-border',
 };
 
 export default function OrderCard({ order }) {
@@ -25,11 +26,9 @@ export default function OrderCard({ order }) {
       </div>
 
       <div className="mt-4 space-y-1.5">
-        {order.items.map((item) => (
-          <div key={`${order.id}-${item.name}`} className="flex justify-between text-xs">
-            <span className="text-muted-foreground">
-              {item.qty}x {item.name}
-            </span>
+        {order.items.map((item, i) => (
+          <div key={i} className="flex justify-between text-xs">
+            <span className="text-muted-foreground">{item.qty}x {item.name}</span>
             <span className="font-medium text-foreground">₦{item.price.toLocaleString()}</span>
           </div>
         ))}

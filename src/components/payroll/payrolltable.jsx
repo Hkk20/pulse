@@ -1,5 +1,12 @@
+import React from 'react';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, Clock } from 'lucide-react';
+import { CheckCircle2, Clock, XCircle } from 'lucide-react';
+
+const statusConfig = {
+  paid: { icon: CheckCircle2, label: 'Paid', class: 'bg-success/10 text-success border-success/20' },
+  pending: { icon: Clock, label: 'Pending', class: 'bg-warning/10 text-warning border-warning/20' },
+  failed: { icon: XCircle, label: 'Failed', class: 'bg-destructive/10 text-destructive border-destructive/20' },
+};
 
 const payrollData = [
   { name: 'Emeka Adebayo', role: 'Cook', base: 85000, bonus: 15000, commission: 0, total: 100000, status: 'paid' },
@@ -10,41 +17,39 @@ const payrollData = [
   { name: 'Amina Yusuf', role: 'Cleaner', base: 40000, bonus: 2000, commission: 0, total: 42000, status: 'paid' },
 ];
 
-const money = (value) => `₦${value.toLocaleString()}`;
-
 export default function PayrollTable() {
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-card">
+    <div className="bg-card rounded-2xl border border-border overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-border bg-card">
-              {['Staff', 'Role', 'Base Salary', 'Bonus', 'Commission', 'Total', 'Status'].map((heading) => (
-                <th key={heading} className="text-left px-5 py-4 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  {heading}
-                </th>
+            <tr className="border-b border-border bg-muted/30">
+              {['Staff', 'Role', 'Base Salary', 'Bonus', 'Commission', 'Total', 'Status'].map(h => (
+                <th key={h} className="text-left px-5 py-4 text-xs font-semibold text-muted-foreground uppercase tracking-wider">{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {payrollData.map((row) => {
-              const paid = row.status === 'paid';
-              const Icon = paid ? CheckCircle2 : Clock;
+            {payrollData.map((row, i) => {
+              const s = statusConfig[row.status];
               return (
-                <tr key={row.name} className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors animate-slide-up">
-                  <td className="px-5 py-4"><span className="text-sm font-semibold text-foreground">{row.name}</span></td>
-                  <td className="px-5 py-4 text-sm text-muted-foreground">{row.role}</td>
-                  <td className="px-5 py-4 text-sm font-medium text-foreground">{money(row.base)}</td>
-                  <td className="px-5 py-4 text-sm text-success font-medium">+{money(row.bonus)}</td>
-                  <td className="px-5 py-4 text-sm text-accent font-medium">+{money(row.commission)}</td>
-                  <td className="px-5 py-4 text-sm font-bold text-foreground">{money(row.total)}</td>
+                <tr
+                  key={row.name}
+                  className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors animate-slide-up"
+                  style={{ animationDelay: `${i * 50}ms`, animationFillMode: 'backwards' }}
+                >
                   <td className="px-5 py-4">
-                    <Badge
-                      variant="outline"
-                      className={`gap-1 rounded-xl px-3 py-1 text-xs ${paid ? 'border-success/20 bg-success/10 text-success' : 'border-warning/25 bg-warning/10 text-warning'}`}
-                    >
-                      <Icon className="h-3 w-3" />
-                      {paid ? 'Paid' : 'Pending'}
+                    <span className="text-sm font-semibold text-foreground">{row.name}</span>
+                  </td>
+                  <td className="px-5 py-4 text-sm text-muted-foreground">{row.role}</td>
+                  <td className="px-5 py-4 text-sm font-medium text-foreground">₦{row.base.toLocaleString()}</td>
+                  <td className="px-5 py-4 text-sm text-success font-medium">+₦{row.bonus.toLocaleString()}</td>
+                  <td className="px-5 py-4 text-sm text-accent font-medium">+₦{row.commission.toLocaleString()}</td>
+                  <td className="px-5 py-4 text-sm font-bold text-foreground">₦{row.total.toLocaleString()}</td>
+                  <td className="px-5 py-4">
+                    <Badge variant="outline" className={`text-[10px] px-2.5 py-1 gap-1 ${s.class}`}>
+                      <s.icon className="w-3 h-3" />
+                      {s.label}
                     </Badge>
                   </td>
                 </tr>

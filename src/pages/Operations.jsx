@@ -1,16 +1,17 @@
-import { useState } from 'react';
-import { ClipboardList, Package, Plus, ShoppingCart } from 'lucide-react';
+import React, { useState } from 'react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { ShoppingCart, Package, ClipboardCheck, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import InventoryRow from '@/components/Operations/Inventory';
-import OrderCard from '@/components/Operations/Ordercard';
+import OrderCard from '@/components/operations/OrderCard';
+import InventoryRow from '@/components/operations/InventoryRow';
 
 const orders = [
-  { id: 1024, status: 'new', customer: 'Table 7', items: [{ qty: 2, name: 'Jollof Rice', price: 3000 }, { qty: 1, name: 'Grilled Chicken', price: 2500 }], time: '2 min ago', location: 'Dine-in', total: 8500 },
-  { id: 1023, status: 'preparing', customer: 'Uber Eats — Tunde', items: [{ qty: 3, name: 'Pepper Soup', price: 4000 }, { qty: 2, name: 'Fried Plantain', price: 1500 }], time: '12 min ago', location: 'Delivery', total: 15000 },
-  { id: 1022, status: 'ready', customer: 'Table 3', items: [{ qty: 1, name: 'Fried Rice', price: 3200 }, { qty: 2, name: 'Suya', price: 1500 }], time: '25 min ago', location: 'Dine-in', total: 6200 },
-  { id: 1021, status: 'delivered', customer: 'Walk-in', items: [{ qty: 3, name: 'Shawarma', price: 1500 }], time: '1 hr ago', location: '', total: 4500 },
-  { id: 1020, status: 'new', customer: 'Table 1', items: [{ qty: 2, name: 'Egusi Soup', price: 4000 }, { qty: 2, name: 'Pounded Yam', price: 2000 }], time: '5 min ago', location: 'Dine-in', total: 12000 },
-  { id: 1019, status: 'preparing', customer: 'Bolt Food — Ada', items: [{ qty: 2, name: 'Ofada Rice', price: 3500 }, { qty: 3, name: 'Moi Moi', price: 900 }], time: '18 min ago', location: 'Delivery', total: 9800 },
+  { id: '1024', customer: 'Table 7', status: 'new', time: '2 min ago', location: 'Dine-in', total: 8500, items: [{ name: 'Jollof Rice', qty: 2, price: 3000 }, { name: 'Grilled Chicken', qty: 1, price: 2500 }] },
+  { id: '1023', customer: 'Uber Eats — Tunde', status: 'preparing', time: '12 min ago', location: 'Delivery', total: 15000, items: [{ name: 'Pepper Soup', qty: 3, price: 4000 }, { name: 'Fried Plantain', qty: 2, price: 1500 }] },
+  { id: '1022', customer: 'Table 3', status: 'ready', time: '25 min ago', location: 'Dine-in', total: 6200, items: [{ name: 'Fried Rice', qty: 1, price: 3200 }, { name: 'Suya', qty: 2, price: 1500 }] },
+  { id: '1021', customer: 'Walk-in', status: 'delivered', time: '1 hr ago', total: 4500, items: [{ name: 'Shawarma', qty: 3, price: 1500 }] },
+  { id: '1020', customer: 'Table 1', status: 'new', time: '5 min ago', location: 'Dine-in', total: 12000, items: [{ name: 'Egusi Soup', qty: 2, price: 4000 }, { name: 'Pounded Yam', qty: 2, price: 2000 }] },
+  { id: '1019', customer: 'Bolt Food — Ada', status: 'preparing', time: '18 min ago', location: 'Delivery', total: 9800, items: [{ name: 'Ofada Rice', qty: 2, price: 3500 }, { name: 'Moi Moi', qty: 3, price: 900 }] },
 ];
 
 const inventory = [
@@ -31,7 +32,7 @@ const tasks = [
   { id: 5, task: 'Order disposable containers', assignee: 'Grace N.', priority: 'medium', done: true },
 ];
 
-const priorityStyles = {
+const priorityColors = {
   high: 'bg-destructive/10 text-destructive',
   medium: 'bg-warning/10 text-warning',
   low: 'bg-success/10 text-success',
@@ -42,63 +43,83 @@ export default function Operations() {
 
   return (
     <div className="p-4 lg:p-8 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between gap-4 flex-wrap">
-        <div className="inline-flex h-9 items-center justify-center rounded-xl bg-muted p-1 text-muted-foreground">
-          {[
-            ['orders', ShoppingCart, 'Orders'],
-            ['inventory', Package, 'Inventory'],
-            ['tasks', ClipboardList, 'Tasks'],
-          ].map(([value, Icon, label]) => (
-            <button
-              key={value}
-              onClick={() => setTab(value)}
-              className={`inline-flex items-center justify-center whitespace-nowrap rounded-lg px-3 py-1 text-sm font-medium transition-all gap-2 ${tab === value ? 'bg-card text-foreground shadow-sm' : ''}`}
-            >
-              <Icon className="w-4 h-4" />
-              <span className="hidden sm:inline">{label}</span>
-            </button>
-          ))}
+      <Tabs value={tab} onValueChange={setTab}>
+        <div className="flex items-center justify-between gap-4 flex-wrap">
+          <TabsList className="bg-muted rounded-xl p-1">
+            <TabsTrigger value="orders" className="rounded-lg gap-2 data-[state=active]:bg-card data-[state=active]:shadow-sm">
+              <ShoppingCart className="w-4 h-4" />
+              <span className="hidden sm:inline">Orders</span>
+            </TabsTrigger>
+            <TabsTrigger value="inventory" className="rounded-lg gap-2 data-[state=active]:bg-card data-[state=active]:shadow-sm">
+              <Package className="w-4 h-4" />
+              <span className="hidden sm:inline">Inventory</span>
+            </TabsTrigger>
+            <TabsTrigger value="tasks" className="rounded-lg gap-2 data-[state=active]:bg-card data-[state=active]:shadow-sm">
+              <ClipboardCheck className="w-4 h-4" />
+              <span className="hidden sm:inline">Tasks</span>
+            </TabsTrigger>
+          </TabsList>
+          <Button className="bg-primary hover:bg-primary/90 rounded-xl gap-2">
+            <Plus className="w-4 h-4" />
+            <span className="hidden sm:inline">New {tab === 'orders' ? 'Order' : tab === 'inventory' ? 'Item' : 'Task'}</span>
+          </Button>
         </div>
-        <Button className="bg-primary hover:bg-primary/90 rounded-xl gap-2">
-          <Plus className="w-4 h-4" />
-          <span className="hidden sm:inline">New {tab === 'orders' ? 'Order' : tab === 'inventory' ? 'Item' : 'Task'}</span>
-        </Button>
-      </div>
 
-      {tab === 'orders' && (
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {orders.map((order, index) => (
-            <div key={order.id} className="animate-slide-up" style={{ animationDelay: `${index * 60}ms`, animationFillMode: 'backwards' }}>
-              <OrderCard order={order} />
-            </div>
-          ))}
-        </div>
-      )}
-
-      {tab === 'inventory' && (
-        <div className="mt-6 bg-card rounded-2xl border border-border divide-y divide-border">
-          {inventory.map((item, index) => (
-            <div key={item.name} className="animate-slide-up" style={{ animationDelay: `${index * 40}ms`, animationFillMode: 'backwards' }}>
-              <InventoryRow item={item} />
-            </div>
-          ))}
-        </div>
-      )}
-
-      {tab === 'tasks' && (
-        <div className="mt-6 bg-card rounded-2xl border border-border divide-y divide-border">
-          {tasks.map((task, index) => (
-            <div key={task.id} className="flex items-center gap-4 p-4 hover:bg-muted/30 transition-colors animate-slide-up" style={{ animationDelay: `${index * 40}ms`, animationFillMode: 'backwards' }}>
-              <input type="checkbox" defaultChecked={task.done} className="w-4 h-4 rounded border-border accent-primary" />
-              <div className="flex-1 min-w-0">
-                <p className={`text-sm font-medium ${task.done ? 'line-through text-muted-foreground' : 'text-foreground'}`}>{task.task}</p>
-                <p className="text-xs text-muted-foreground mt-0.5">Assigned to {task.assignee}</p>
+        <TabsContent value="orders" className="mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {orders.map((order, i) => (
+              <div
+                key={order.id}
+                className="animate-slide-up"
+                style={{ animationDelay: `${i * 60}ms`, animationFillMode: 'backwards' }}
+              >
+                <OrderCard order={order} />
               </div>
-              <span className={`text-[10px] font-semibold px-2 py-1 rounded-lg capitalize ${priorityStyles[task.priority]}`}>{task.priority}</span>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        </TabsContent>
+
+        <TabsContent value="inventory" className="mt-6">
+          <div className="bg-card rounded-2xl border border-border divide-y divide-border">
+            {inventory.map((item, i) => (
+              <div
+                key={item.name}
+                className="animate-slide-up"
+                style={{ animationDelay: `${i * 40}ms`, animationFillMode: 'backwards' }}
+              >
+                <InventoryRow item={item} />
+              </div>
+            ))}
+          </div>
+        </TabsContent>
+
+        <TabsContent value="tasks" className="mt-6">
+          <div className="bg-card rounded-2xl border border-border divide-y divide-border">
+            {tasks.map((t, i) => (
+              <div
+                key={t.id}
+                className="flex items-center gap-4 p-4 hover:bg-muted/30 transition-colors animate-slide-up"
+                style={{ animationDelay: `${i * 40}ms`, animationFillMode: 'backwards' }}
+              >
+                <input
+                  type="checkbox"
+                  defaultChecked={t.done}
+                  className="w-4 h-4 rounded border-border accent-primary"
+                />
+                <div className="flex-1 min-w-0">
+                  <p className={`text-sm font-medium ${t.done ? 'line-through text-muted-foreground' : 'text-foreground'}`}>
+                    {t.task}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Assigned to {t.assignee}</p>
+                </div>
+                <span className={`text-[10px] font-semibold px-2 py-1 rounded-lg capitalize ${priorityColors[t.priority]}`}>
+                  {t.priority}
+                </span>
+              </div>
+            ))}
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
