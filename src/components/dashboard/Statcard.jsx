@@ -18,24 +18,24 @@ export default function StatCard({ label, value, change, changeType, icon: Icon,
 
   return (
     <div className={`
-      relative overflow-hidden rounded-2xl border p-6 lg:p-8
+      relative overflow-hidden rounded-2xl border p-5 lg:p-6
       bg-gradient-to-br ${gradients[gradient] || gradients.purple}
       hover:shadow-lg transition-all duration-300 group
     `}>
       <div className="flex items-start justify-between">
         <div className="space-y-3">
-          <p className="text-lg font-medium text-muted-foreground">{label}</p>
-          <p className="text-3xl lg:text-4xl font-heading font-bold text-foreground">{value}</p>
+          <p className="text-sm font-medium text-muted-foreground">{label}</p>
+          <p className="text-2xl lg:text-3xl font-heading font-bold text-foreground">{value}</p>
           {change && (
-            <div className={`flex items-center gap-1.5 text-base font-semibold ${isPositive ? 'text-success' : 'text-destructive'}`}>
+            <div className={`flex items-center gap-1.5 text-xs font-semibold ${isPositive ? 'text-success' : 'text-destructive'}`}>
               {isPositive ? <TrendingUp className="w-3.5 h-3.5" /> : <TrendingDown className="w-3.5 h-3.5" />}
               <span>{change}</span>
               <span className="text-muted-foreground font-normal">vs last week</span>
             </div>
           )}
         </div>
-        <div className={`p-4 rounded-2xl ${iconBgs[gradient] || iconBgs.purple} group-hover:scale-110 transition-transform duration-300`}>
-          <Icon className="w-6 h-6" />
+        <div className={`p-3 rounded-xl ${iconBgs[gradient] || iconBgs.purple} group-hover:scale-110 transition-transform duration-300`}>
+          <Icon className="w-5 h-5" />
         </div>
       </div>
 

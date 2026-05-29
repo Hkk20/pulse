@@ -1,34 +1,34 @@
-import { CheckCircle2, Clock, DollarSign, Download, FileText, Plus, Users, Zap } from 'lucide-react';
+import { CheckCircle2, Clock, DollarSign, Download, FileText, Users, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import StatCard from '@/components/dashboard/Statcard';
 import PayrollTable from '@/components/payroll/payrolltable';
 
 export default function Payroll() {
   return (
-    <div className="space-y-8">
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+    <div className="p-4 lg:p-8 max-w-7xl mx-auto space-y-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <StatCard label="Total Payroll" value="₦485,000" change="+8.2%" changeType="up" icon={DollarSign} gradient="purple" />
         <StatCard label="Staff Count" value="24" change="+2" changeType="up" icon={Users} gradient="teal" />
         <StatCard label="Pending" value="₦202,000" icon={Clock} gradient="orange" />
         <StatCard label="Processed" value="₦283,000" icon={CheckCircle2} gradient="pink" />
       </div>
 
-      <div className="flex flex-col gap-5 rounded-2xl border border-border bg-gradient-to-r from-primary/5 via-card to-accent/5 p-6 lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl p-5 border border-primary/10">
         <div>
-          <h2 className="text-xl font-bold text-foreground">May 2026 Payroll</h2>
-          <p className="mt-1 text-lg text-muted-foreground">Ready to process for 24 staff members</p>
+          <h2 className="text-base font-heading font-bold text-foreground">May 2026 Payroll</h2>
+          <p className="text-sm text-muted-foreground mt-0.5">Ready to process for 24 staff members</p>
         </div>
-        <div className="flex flex-wrap gap-4">
-          <Button variant="outline" className="h-11 gap-2 rounded-2xl bg-card px-5 text-lg shadow-sm">
-            <Download className="h-5 w-5" />
-            Export
+        <div className="flex gap-3">
+          <Button variant="outline" className="rounded-xl gap-2">
+            <Download className="h-4 w-4" />
+            <span className="hidden sm:inline">Export</span>
           </Button>
-          <Button variant="outline" className="h-11 gap-2 rounded-2xl bg-card px-5 text-lg shadow-sm">
-            <FileText className="h-5 w-5" />
-            Receipts
+          <Button variant="outline" className="rounded-xl gap-2">
+            <FileText className="h-4 w-4" />
+            <span className="hidden sm:inline">Receipts</span>
           </Button>
-          <Button className="h-11 gap-2 rounded-2xl px-6 text-lg shadow-xl shadow-primary/25">
-            <Zap className="h-5 w-5" />
+          <Button className="bg-primary hover:bg-primary/90 rounded-xl gap-2 shadow-lg shadow-primary/25">
+            <Zap className="h-4 w-4" />
             Pay All Now
           </Button>
         </div>

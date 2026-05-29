@@ -9,25 +9,25 @@ const staff = [
 
 export default function TopStaff() {
   return (
-    <div className="rounded-2xl border border-border bg-card p-7">
-      <div className="mb-8 flex items-center justify-between">
-        <h3 className="text-2xl font-bold text-foreground">Top Performers</h3>
-        <button className="text-base font-medium text-primary hover:underline">View all</button>
+    <div className="bg-card rounded-2xl border border-border p-5 lg:p-6">
+      <div className="flex items-center justify-between mb-5">
+        <h3 className="text-lg font-heading font-bold text-foreground">Top Performers</h3>
+        <button className="text-xs font-medium text-primary hover:underline">View all</button>
       </div>
-      <div className="space-y-8">
+      <div className="space-y-3">
         {staff.map((member) => (
-          <div key={member.name} className="flex items-center gap-4">
-            <div className="flex h-[50px] w-[50px] items-center justify-center rounded-2xl bg-muted text-xl">{member.avatar}</div>
+          <div key={member.name} className="flex items-center gap-3 p-3 rounded-xl hover:bg-muted/50 transition-colors cursor-pointer group">
+            <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-lg group-hover:scale-110 transition-transform">{member.avatar}</div>
             <div className="min-w-0 flex-1">
-              <p className="text-lg font-bold text-foreground">{member.name}</p>
-              <p className="text-base text-muted-foreground">{member.role}</p>
+              <p className="text-sm font-semibold text-foreground">{member.name}</p>
+              <p className="text-xs text-muted-foreground">{member.role}</p>
             </div>
             <div className="text-right">
               <div className="flex items-center justify-end gap-1">
-                <Star className="h-4 w-4 fill-warning text-warning" />
-                <span className="text-base font-bold text-foreground">{member.rating}</span>
+                <Star className="w-3 h-3 text-warning fill-warning" />
+                <span className="text-xs font-bold text-foreground">{member.rating}</span>
               </div>
-              <p className="text-sm text-muted-foreground">{member.hours}h/wk</p>
+              <p className="text-[11px] text-muted-foreground">{member.hours}h/wk</p>
             </div>
           </div>
         ))}

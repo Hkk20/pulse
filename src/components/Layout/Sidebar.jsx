@@ -34,23 +34,23 @@ export default function Sidebar({ isOpen, onClose }) {
 
       <aside
         className={`
-          fixed top-0 left-0 z-50 h-full w-[330px] lg:w-[360px]
+          fixed top-0 left-0 z-50 h-full w-72
           bg-sidebar text-sidebar-foreground
           flex flex-col
           transition-transform duration-300 ease-out
-          lg:translate-x-0
+          lg:translate-x-0 lg:static lg:z-auto
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         `}
       >
         {/* Logo */}
-        <div className="flex items-center justify-between px-8 py-8">
+        <div className="flex items-center justify-between px-6 py-6">
           <Link to="/" className="flex items-center gap-3" onClick={onClose}>
-            <div className="w-[52px] h-[52px] rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/25">
-              <Activity className="w-7 h-7 text-primary-foreground" />
+            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center animate-pulse-glow">
+              <Activity className="w-5 h-5 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-2xl font-heading font-bold tracking-tight text-white">Pulse</h1>
-              <p className="text-[11px] uppercase tracking-[0.34em] text-sidebar-foreground/60 font-semibold">Business OS</p>
+              <h1 className="text-xl font-heading font-bold tracking-tight text-white">Pulse</h1>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-sidebar-foreground/50 font-medium">Business OS</p>
             </div>
           </Link>
           <button
@@ -62,7 +62,7 @@ export default function Sidebar({ isOpen, onClose }) {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-4 py-12 space-y-3">
+        <nav className="flex-1 px-3 py-4 space-y-1">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (
@@ -71,27 +71,27 @@ export default function Sidebar({ isOpen, onClose }) {
                 to={item.path}
                 onClick={onClose}
                 className={`
-                  flex items-center gap-4 px-5 py-4 rounded-2xl text-lg font-semibold
+                  flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
                   transition-all duration-200 group relative
                   ${isActive
-                    ? 'bg-primary text-primary-foreground shadow-xl shadow-primary/25'
+                    ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25'
                     : 'text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground'
                   }
                 `}
               >
-                <item.icon className={`w-6 h-6 ${isActive ? '' : 'group-hover:scale-110 transition-transform'}`} />
+                <item.icon className={`w-5 h-5 ${isActive ? '' : 'group-hover:scale-110 transition-transform'}`} />
                 <span>{item.label}</span>
-                {isActive && <ChevronRight className="w-5 h-5 ml-auto" />}
+                {isActive && <ChevronRight className="w-4 h-4 ml-auto" />}
               </Link>
             );
           })}
         </nav>
 
         {/* Bottom card */}
-        <div className="p-5 m-4 mb-8 rounded-2xl bg-gradient-to-br from-white/10 to-accent/10 border border-sidebar-border">
-          <p className="text-base font-bold text-sidebar-foreground/90">Pulse Pro</p>
-          <p className="text-sm leading-relaxed text-sidebar-foreground/60 mt-2">Unlock advanced analytics & multi-branch support</p>
-          <button className="mt-5 w-full py-3 text-sm font-bold bg-primary text-primary-foreground rounded-2xl hover:opacity-90 transition-opacity">
+        <div className="p-4 m-3 mb-6 rounded-xl bg-gradient-to-br from-primary/20 to-accent/10 border border-sidebar-border">
+          <p className="text-xs font-medium text-sidebar-foreground/80">Pulse Pro</p>
+          <p className="text-[11px] text-sidebar-foreground/50 mt-1">Unlock advanced analytics & multi-branch support</p>
+          <button className="mt-3 w-full py-2 text-xs font-semibold bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity">
             Upgrade Now
           </button>
         </div>

@@ -15,15 +15,15 @@ export default function StaffCard({ member }) {
   const colorClass = roleColors[member.role?.toLowerCase()] || roleColors.cook;
 
   return (
-    <div className="bg-card rounded-2xl border border-border p-6 hover:shadow-xl hover:border-primary/25 transition-all duration-300 group">
+    <div className="bg-card rounded-2xl border border-border p-5 hover:shadow-lg hover:border-primary/20 transition-all duration-300 group">
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-[60px] h-[60px] rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-2xl group-hover:scale-105 transition-transform">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
             {member.avatar}
           </div>
           <div>
-            <h4 className="text-lg font-bold text-foreground">{member.name}</h4>
-            <Badge variant="outline" className={`text-xs mt-2 px-3 py-1 rounded-xl ${colorClass}`}>
+            <h4 className="text-sm font-bold text-foreground">{member.name}</h4>
+            <Badge variant="outline" className={`text-[10px] mt-1 px-2 py-0.5 ${colorClass}`}>
               {member.role}
             </Badge>
           </div>
@@ -33,25 +33,25 @@ export default function StaffCard({ member }) {
         </button>
       </div>
 
-      <div className="mt-5 space-y-3">
-        <div className="flex items-center gap-3 text-base text-muted-foreground">
-          <Phone className="w-4 h-4" />
+      <div className="mt-4 space-y-2">
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <Phone className="w-3.5 h-3.5" />
           <span>{member.phone}</span>
         </div>
-        <div className="flex items-center gap-3 text-base text-muted-foreground">
-          <Mail className="w-4 h-4" />
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <Mail className="w-3.5 h-3.5" />
           <span className="truncate">{member.email}</span>
         </div>
       </div>
 
-      <div className="mt-6 pt-5 border-t border-border flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Clock className="w-4 h-4 text-muted-foreground" />
-          <span className="text-base text-muted-foreground">{member.hours}h this week</span>
+      <div className="mt-4 pt-4 border-t border-border flex items-center justify-between">
+        <div className="flex items-center gap-1.5">
+          <Clock className="w-3.5 h-3.5 text-muted-foreground" />
+          <span className="text-xs text-muted-foreground">{member.hours}h this week</span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <span className={`w-2 h-2 rounded-full ${member.status === 'active' ? 'bg-success' : 'bg-muted-foreground'}`} />
-          <span className="text-base font-medium capitalize text-muted-foreground">{member.status}</span>
+          <span className="text-xs font-medium capitalize text-muted-foreground">{member.status}</span>
         </div>
       </div>
     </div>

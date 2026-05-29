@@ -6,26 +6,31 @@ import TopStaff from '@/components/dashboard/Topstaff';
 
 export default function Dashboard() {
   return (
-    <div className="space-y-8">
-      <div className="grid gap-5 md:grid-cols-3">
-        <StatCard label="Revenue" value="₦1.24M" change="+14%" changeType="up" icon={ShoppingBag} gradient="purple" />
-        <StatCard label="Orders" value="362" change="+6%" changeType="up" icon={TrendingUp} gradient="orange" />
-        <StatCard label="Team Cost" value="₦384K" change="-3%" changeType="down" icon={Users} gradient="teal" />
+    <div className="p-4 lg:p-8 space-y-6 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <StatCard label="Today's Revenue" value="₦248,500" change="+12.5%" changeType="up" icon={ShoppingBag} gradient="purple" />
+        <StatCard label="Total Staff" value="24" change="+2" changeType="up" icon={Users} gradient="teal" />
+        <StatCard label="Active Orders" value="18" change="+5.2%" changeType="up" icon={ShoppingBag} gradient="orange" />
+        <StatCard label="Net Profit" value="₦89,200" change="-2.1%" changeType="down" icon={TrendingUp} gradient="pink" />
       </div>
 
-      <div className="grid gap-8 xl:grid-cols-[1.35fr_0.9fr]">
-        <RevenueChart />
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
+        <div className="lg:col-span-2">
+          <RevenueChart />
+        </div>
         <RecentActivity />
       </div>
 
-      <div className="grid gap-8 xl:grid-cols-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
         <TopStaff />
-        <section className="rounded-2xl bg-primary p-10 text-primary-foreground">
-          <h2 className="text-2xl font-bold">Quick Actions</h2>
-          <p className="mt-3 text-lg font-semibold text-white/80">Common tasks at your fingertips</p>
-          <div className="mt-[215px] grid gap-4 sm:grid-cols-2">
+        <section className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-6 lg:p-8 text-primary-foreground flex flex-col justify-between min-h-[240px]">
+          <div>
+            <h2 className="text-lg font-heading font-bold">Quick Actions</h2>
+            <p className="text-sm opacity-80 mt-1">Common tasks at your fingertips</p>
+          </div>
+          <div className="grid grid-cols-2 gap-3 mt-6">
             {['Run Payroll', 'Add Staff', 'New Order', 'View Reports'].map((action) => (
-              <button key={action} className="rounded-2xl bg-white/20 px-5 py-4 text-left text-lg font-bold text-white transition hover:bg-white/25">
+              <button key={action} className="py-3 px-4 rounded-xl bg-white/15 hover:bg-white/25 text-sm font-medium transition-colors backdrop-blur-sm text-left">
                 {action}
               </button>
             ))}

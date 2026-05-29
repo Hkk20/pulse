@@ -9,12 +9,12 @@ import Operations from "./pages/Operations";
 import Settings from "./pages/Settings";
 
 const pageMeta = {
-  '/dashboard': { title: 'Dashboard', subtitle: 'Business overview' },
+  '/dashboard': { title: 'Dashboard', subtitle: 'Your business at a glance' },
   '/staff': { title: 'Staff Management', subtitle: 'Manage your team' },
   '/payroll': { title: 'Payroll', subtitle: 'Salaries & payments' },
   '/operations': { title: 'Operations', subtitle: 'Orders & inventory' },
   '/settings': { title: 'Settings', subtitle: 'App configuration' },
-  '/': { title: 'Dashboard', subtitle: 'Business overview' },
+  '/': { title: 'Dashboard', subtitle: 'Your business at a glance' },
 };
 
 export default function App() {

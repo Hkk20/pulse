@@ -26,48 +26,50 @@ export default function Staff() {
   }, [query]);
 
   return (
-    <div className="space-y-9">
-      <div className="flex flex-col gap-7 xl:flex-row xl:items-center xl:justify-between">
-        <div className="flex flex-1 flex-col gap-6 md:flex-row md:items-center">
-          <div className="flex h-[50px] w-full items-center gap-3 rounded-2xl bg-muted px-5 md:max-w-[360px]">
-            <Search className="h-5 w-5 text-muted-foreground" />
+    <div className="p-4 lg:p-8 max-w-7xl mx-auto space-y-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-3 w-full sm:w-auto">
+          <div className="flex items-center gap-2 bg-muted rounded-xl px-4 py-2.5 flex-1 sm:w-72">
+            <Search className="h-4 w-4 text-muted-foreground" />
             <input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search staff..."
-              className="w-full bg-transparent text-lg outline-none placeholder:text-muted-foreground/70"
+              className="w-full bg-transparent text-sm outline-none"
             />
           </div>
-          <button className="flex h-[48px] w-[48px] items-center justify-center rounded-2xl bg-muted text-muted-foreground">
-            <Filter className="h-5 w-5" />
+          <button className="p-2.5 rounded-xl bg-muted hover:bg-muted/80 transition-colors">
+            <Filter className="h-4 w-4 text-muted-foreground" />
           </button>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="flex h-[50px] items-center rounded-2xl bg-muted p-1">
-            <button className="flex h-10 w-10 items-center justify-center rounded-xl bg-card shadow-sm">
-              <Grid3X3 className="h-5 w-5" />
+        <div className="flex items-center gap-2">
+          <div className="flex bg-muted rounded-xl p-1">
+            <button className="p-2 rounded-lg bg-card shadow-sm transition-colors">
+              <Grid3X3 className="h-4 w-4" />
             </button>
-            <button className="flex h-10 w-10 items-center justify-center rounded-xl text-muted-foreground">
-              <List className="h-5 w-5" />
+            <button className="p-2 rounded-lg transition-colors">
+              <List className="h-4 w-4" />
             </button>
           </div>
-          <Button onClick={() => setOpen(true)} className="h-[46px] gap-2 rounded-2xl px-6 text-lg shadow-lg shadow-primary/25">
-            <Plus className="h-5 w-5" />
-            Add Staff
+          <Button onClick={() => setOpen(true)} className="bg-primary hover:bg-primary/90 rounded-xl gap-2">
+            <Plus className="h-4 w-4" />
+            <span className="hidden sm:inline">Add Staff</span>
           </Button>
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-4">
-        <span className="rounded-2xl bg-primary/10 px-5 py-2.5 text-base font-bold text-primary">6 Total</span>
-        <span className="rounded-2xl bg-success/10 px-5 py-2.5 text-base font-bold text-success">5 Active</span>
-        <span className="rounded-2xl bg-muted px-5 py-2.5 text-base font-bold text-muted-foreground">1 Off Duty</span>
+      <div className="flex gap-3 overflow-x-auto pb-1">
+        <span className="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-primary/10 text-primary">6 Total</span>
+        <span className="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-success/10 text-success">5 Active</span>
+        <span className="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-muted text-muted-foreground">1 Off Duty</span>
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
-        {filteredStaff.map((member) => (
-          <StaffCard key={member.email} member={member} />
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {filteredStaff.map((member, index) => (
+          <div key={member.email} className="animate-slide-up" style={{ animationDelay: `${index * 60}ms`, animationFillMode: 'backwards' }}>
+            <StaffCard member={member} />
+          </div>
         ))}
       </div>
 

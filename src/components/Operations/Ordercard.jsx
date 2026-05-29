@@ -10,45 +10,45 @@ const statusStyles = {
 
 export default function OrderCard({ order }) {
   return (
-    <div className="group cursor-pointer rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/25 hover:shadow-xl">
+    <div className="bg-card rounded-2xl border border-border p-5 hover:shadow-lg hover:border-primary/20 transition-all duration-300 group cursor-pointer">
       <div className="flex items-start justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-lg font-bold text-foreground">#{order.id}</span>
-            <Badge variant="outline" className={`rounded-xl px-3 py-1 text-xs capitalize ${statusStyles[order.status]}`}>
+            <span className="text-sm font-bold text-foreground">#{order.id}</span>
+            <Badge variant="outline" className={`text-[10px] px-2 py-0.5 capitalize ${statusStyles[order.status]}`}>
               {order.status}
             </Badge>
           </div>
-          <p className="mt-1 text-base text-muted-foreground">{order.customer}</p>
+          <p className="text-xs text-muted-foreground mt-1">{order.customer}</p>
         </div>
-        <ChevronRight className="h-5 w-5 text-muted-foreground transition-all group-hover:translate-x-1 group-hover:text-primary" />
+        <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
       </div>
 
-      <div className="mt-5 space-y-2">
+      <div className="mt-4 space-y-1.5">
         {order.items.map((item) => (
-          <div key={`${order.id}-${item.name}`} className="flex justify-between text-base">
+          <div key={`${order.id}-${item.name}`} className="flex justify-between text-xs">
             <span className="text-muted-foreground">
               {item.qty}x {item.name}
             </span>
-            <span className="font-bold text-foreground">₦{item.price.toLocaleString()}</span>
+            <span className="font-medium text-foreground">₦{item.price.toLocaleString()}</span>
           </div>
         ))}
       </div>
 
-      <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1 text-base text-muted-foreground">
-            <Clock className="h-4 w-4" />
+      <div className="mt-4 pt-3 border-t border-border flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1 text-xs text-muted-foreground">
+            <Clock className="w-3 h-3" />
             {order.time}
           </div>
           {order.location && (
-            <div className="flex items-center gap-1 text-base text-muted-foreground">
-              <MapPin className="h-4 w-4" />
+            <div className="flex items-center gap-1 text-xs text-muted-foreground">
+              <MapPin className="w-3 h-3" />
               {order.location}
             </div>
           )}
         </div>
-        <span className="text-lg font-bold text-foreground">₦{order.total.toLocaleString()}</span>
+        <span className="text-sm font-bold text-foreground">₦{order.total.toLocaleString()}</span>
       </div>
     </div>
   );

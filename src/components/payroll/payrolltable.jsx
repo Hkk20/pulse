@@ -16,11 +16,11 @@ export default function PayrollTable() {
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-card">
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[980px]">
+        <table className="w-full">
           <thead>
             <tr className="border-b border-border bg-card">
               {['Staff', 'Role', 'Base Salary', 'Bonus', 'Commission', 'Total', 'Status'].map((heading) => (
-                <th key={heading} className="px-7 py-5 text-left text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                <th key={heading} className="text-left px-5 py-4 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                   {heading}
                 </th>
               ))}
@@ -31,14 +31,14 @@ export default function PayrollTable() {
               const paid = row.status === 'paid';
               const Icon = paid ? CheckCircle2 : Clock;
               return (
-                <tr key={row.name} className="border-b border-border last:border-0 hover:bg-muted/25">
-                  <td className="px-7 py-5 text-lg font-bold text-foreground">{row.name}</td>
-                  <td className="px-7 py-5 text-lg text-muted-foreground">{row.role}</td>
-                  <td className="px-7 py-5 text-lg font-semibold text-foreground">{money(row.base)}</td>
-                  <td className="px-7 py-5 text-lg font-semibold text-success">+{money(row.bonus)}</td>
-                  <td className="px-7 py-5 text-lg font-semibold text-accent">+{money(row.commission)}</td>
-                  <td className="px-7 py-5 text-lg font-bold text-foreground">{money(row.total)}</td>
-                  <td className="px-7 py-5">
+                <tr key={row.name} className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors animate-slide-up">
+                  <td className="px-5 py-4"><span className="text-sm font-semibold text-foreground">{row.name}</span></td>
+                  <td className="px-5 py-4 text-sm text-muted-foreground">{row.role}</td>
+                  <td className="px-5 py-4 text-sm font-medium text-foreground">{money(row.base)}</td>
+                  <td className="px-5 py-4 text-sm text-success font-medium">+{money(row.bonus)}</td>
+                  <td className="px-5 py-4 text-sm text-accent font-medium">+{money(row.commission)}</td>
+                  <td className="px-5 py-4 text-sm font-bold text-foreground">{money(row.total)}</td>
+                  <td className="px-5 py-4">
                     <Badge
                       variant="outline"
                       className={`gap-1 rounded-xl px-3 py-1 text-xs ${paid ? 'border-success/20 bg-success/10 text-success' : 'border-warning/25 bg-warning/10 text-warning'}`}
